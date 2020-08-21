@@ -1,6 +1,6 @@
 package main.java.match;
 
-import java.util.Optional;
+import java.lang.reflect.Method;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -18,9 +18,17 @@ public class BaseMatch {
         return toMatch::isInstance;
     }
 
-    public static <A, R> Predicate<A> $Optional(Predicate<R> predicate) {
-        return (A toMatch) -> instanceOf(Optional.class).test(toMatch)
-                && predicate.test(((Optional<R>) toMatch).get());
+    public static <A, R> Predicate<R> $d(Predicate<A> predicate) {
+        return (R toMatch) -> {
+            try {
+                Method aGetMethod = toMatch.getClass().getMethod("get");
+                A innerValue = (A) aGetMethod.invoke(toMatch);
+                return predicate.test(innerValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        };
     }
 
     public static <A, R> CaseWrapper<A, R> Case(Predicate<A> predicate, Function<A, R> mapper) {

@@ -1,7 +1,5 @@
 package main.java.examples;
 
-import main.java.match.BaseMatch;
-
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
@@ -25,12 +23,12 @@ public class Main {
                 Default("somethings wrong")
         );
 
-        var a = Match(Optional.of(5)).of(
-                Case($Optional($(4)), "this is 4"),
-                Case($Optional($(5)), "this is 5"),
-                Default(x -> x + "")
+        var basicDestructuring = Match(Optional.of(5)).of(
+                Case($d($(4)), "it holds 4"),
+                Case($d($(5)), "it holds 5"),
+                Default(x -> x + "some optional")
         );
 
-        System.out.printf("[%s]%n", a);
+        System.out.printf("[%s]%n", basicDestructuring);
     }
 }
