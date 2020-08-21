@@ -1,4 +1,4 @@
-This library is a playful attempt to replicate VAVR's functionality: 
+# Usage examples
  
 ```java
 Match(10).option(
