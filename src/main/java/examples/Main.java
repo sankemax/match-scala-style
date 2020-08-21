@@ -10,7 +10,7 @@ import static main.java.match.BaseMatch.*;
 
 public class Main {
     public static void main(String[] args) {
-        var whatIsThisMagic = BaseMatch.Match(10).option(
+        var whatIsThisMagic = Match(10).option(
                 Case(x -> x > 10, x -> x + " is larger than 10"),
                 Case(x -> x < 10, x -> x + " is smaller than 10"),
                 Case($(10), x -> x + " is 10"),
